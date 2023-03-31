@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for post in posts %}
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-3">
+            <img src="https://picsum.photos/300/200" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-9">
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.body|truncatewords:15}}.... <a class="text-decoration-none"
+                        href="{% url 'post_details' post.slug %}">Read
+                        More</a>
+                </p>
+                <p class="card-text"><small class="text-body-secondary">
+                        Author: {{post.category.author.name}} category: <a
+                            href="{% url 'category_details' post.category.slug %}">{{post.category.name}}</a>
+                        updated: {{post.updated | timesince }}
+                    </small></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{%endblock%}
